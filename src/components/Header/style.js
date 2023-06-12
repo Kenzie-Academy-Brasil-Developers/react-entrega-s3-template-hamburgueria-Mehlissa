@@ -6,6 +6,7 @@ export const StyledHeader = styled.header`
   position: absolute;
 
   width: 100%;
+  top: 0%;
 
   .headerContainer {
     display: flex;
@@ -33,6 +34,7 @@ export const StyledHeader = styled.header`
 
   .headerContainer__CountCart {
     background-color: var(--color-primary);
+    color: var(--white);
 
     height: 22px;
     width: 17px;
@@ -42,8 +44,10 @@ export const StyledHeader = styled.header`
     align-items: center;
 
     position: absolute;
-    right: 7px;
-    top: 6px;
+    position: 10px;
+
+    margin-left: 20px;
+    margin-top: -10px;
 
     border-radius: 7px;
 
@@ -91,5 +95,11 @@ export const StyledHeader = styled.header`
 
     border-radius: 8px;
     border: none;
+  }
+
+  @media (min-width: 768px) {
+    .headerContainer {
+      padding: 18px 5%;
+    }
   }
 `;

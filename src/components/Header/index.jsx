@@ -3,8 +3,16 @@ import imagecart from "../../assets/cart.svg";
 import imageLogo from "../../assets/logo.svg";
 
 import { StyledHeader } from "./style";
+import { Modal } from "../Modal";
+import { useState } from "react";
 
-export const Header = () => {
+export const Header = ({ setInputSearch, buttonAdd }) => {
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <StyledHeader>
       <div className="headerContainer">
@@ -18,21 +26,34 @@ export const Header = () => {
               className="headerContainer__logo--Card"
               src={imagecart}
               alt=""
+              onClick={() => setOpenModal(true)}
             />
           </div>
         </div>
 
+        <div>
+          <Modal
+            buttonAdd={buttonAdd}
+            isOpen={openModal}
+            setOpenModal={() => setOpenModal(!openModal)}
+          />
+        </div>
+
         <div className="headerContainer__search">
-          <div className="headerContainer__search--div">
+          <form
+            className="headerContainer__search--div"
+            onSubmit={handleSubmit}
+          >
             <input
               className="headerContainer__search--input"
               placeholder="Digitar Pesquisa"
               type="text"
+              onChange={(event) => setInputSearch(event.target.value)}
             />
             <button className="headerContainer__search--buttonSubmit">
               <img src={imageSearch} alt="" />
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </StyledHeader>
