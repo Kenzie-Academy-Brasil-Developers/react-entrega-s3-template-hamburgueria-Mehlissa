@@ -6,7 +6,7 @@ import { StyledHeader } from "./style";
 import { Modal } from "../Modal";
 import { useState } from "react";
 
-export const Header = ({ setInputSearch, buttonAdd }) => {
+export const Header = ({ setInputSearch, newList, setNewList }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const handleSubmit = (event) => {
@@ -20,7 +20,7 @@ export const Header = ({ setInputSearch, buttonAdd }) => {
           <img src={imageLogo} alt="" />
           <div className="headerContainer__DivCart">
             <div className="headerContainer__CountCart">
-              <p>0</p>
+              <p>{newList.length}</p>
             </div>
             <img
               className="headerContainer__logo--Card"
@@ -29,31 +29,31 @@ export const Header = ({ setInputSearch, buttonAdd }) => {
               onClick={() => setOpenModal(true)}
             />
           </div>
+          <div className="headerContainer__search">
+            <form
+              className="headerContainer__search--div"
+              onSubmit={handleSubmit}
+            >
+              <input
+                className="headerContainer__search--input"
+                placeholder="Digitar Pesquisa"
+                type="text"
+                onChange={(event) => setInputSearch(event.target.value)}
+              />
+              <button className="headerContainer__search--buttonSubmit">
+                <img src={imageSearch} alt="" />
+              </button>
+            </form>
+          </div>
         </div>
 
         <div>
           <Modal
-            buttonAdd={buttonAdd}
             isOpen={openModal}
-            setOpenModal={() => setOpenModal(!openModal)}
+            setOpenModal={() => setOpenModal(false)}
+            newList={newList}
+            setNewList={setNewList}
           />
-        </div>
-
-        <div className="headerContainer__search">
-          <form
-            className="headerContainer__search--div"
-            onSubmit={handleSubmit}
-          >
-            <input
-              className="headerContainer__search--input"
-              placeholder="Digitar Pesquisa"
-              type="text"
-              onChange={(event) => setInputSearch(event.target.value)}
-            />
-            <button className="headerContainer__search--buttonSubmit">
-              <img src={imageSearch} alt="" />
-            </button>
-          </form>
         </div>
       </div>
     </StyledHeader>

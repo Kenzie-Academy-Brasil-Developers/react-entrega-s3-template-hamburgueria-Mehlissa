@@ -1,57 +1,89 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useRef } from "react";
 import { StyledModal } from "./style";
 
 import trashImage from "../../assets/trash.svg";
+import { TextButtonCart, TitleCart, ValueCart } from "./typograph";
+import { TotalPriceCount } from "../TotalPrice";
+import { StyledMainModal } from "../../styles/MainModal";
 
-export const Modal = ({ isOpen, setOpenModal, buttonAdd }) => {
-  const [products, setProducts] = useState([]);
-  const [productCarts, setProductCarts] = useState([]);
-
+export const Modal = ({ isOpen, setOpenModal, newList, setNewList }) => {
+  const modalRef = useRef(null);
   useEffect(() => {
-    const productList = async () => {
-      const response = await axios.get(
-        "https://hamburgueria-kenzie-json-serve.herokuapp.com/products"
-      );
-      setProducts(response.data);
+    const handleOutClick = (event) => {
+      if (!modalRef.current?.contains(event.target)) {
+        setOpenModal();
+      }
     };
 
-    productList();
+    window.addEventListener("mousedown", handleOutClick);
+
+    return () => {
+      window.removeEventListener("mousedown", handleOutClick);
+    };
   }, []);
 
+  const buttonRef = useRef(null);
   useEffect(() => {
-    const filterProducts = products.filter((product) => {
-      if (product.id == buttonAdd) {
-        setProductCarts(product);
+    const handlekeydown = (event) => {
+      if (event.key === "Escape") {
+        setOpenModal();
       }
-    });
-    filterProducts;
-  });
+    };
+
+    window.addEventListener("keydown", handlekeydown);
+
+    return () => {
+      window.removeEventListener("keydown", handlekeydown);
+    };
+  }, []);
+
+  const RemoveProduct = (productId) => {
+    setNewList((newList) =>
+      newList.filter((product) => product.id !== productId)
+    );
+  };
 
   if (isOpen) {
     return (
       <StyledModal>
         <div>
-          <div className="modalController">
+          <div ref={modalRef} className="modalController">
             <header className="modalController__container--Header">
               <h3>Carrinho de compras</h3>
               <button
                 className="modalController__container--button"
-                onClick={setOpenModal}
+                ref={buttonRef}
+                onClick={() => setOpenModal()}
               >
                 X
               </button>
             </header>
             <div className="modalController__container">
-              <main>
-                {[productCarts].map((produto) => (
-                  <li key={productCarts.id}>
-                    <img src={productCarts.img} alt="" />
-                    <h3>{productCarts.name}</h3>
-                    <img src={trashImage} alt="" />
+              <StyledMainModal>
+                {newList.map((product) => (
+                  <li key={product.id} className="ListProductsCart">
+                    <div className="ListProductsCart__container">
+                      <div className="ListProductsCart__container--divimage">
+                        <img
+                          className="ListProductsCart__container--image"
+                          src={product.img}
+                          alt="Image Product Card"
+                        />
+                      </div>
+                      <TitleCart>{product.name}</TitleCart>
+                    </div>
+                    <div
+                      className="ButtonTrash"
+                      onClick={() => RemoveProduct(product.id)}
+                    >
+                      <img src={trashImage} alt="" />
+                    </div>
                   </li>
                 ))}
-              </main>
+              </StyledMainModal>
+              <TotalPriceCount newList={newList} setNewList={setNewList} />
             </div>
           </div>
         </div>

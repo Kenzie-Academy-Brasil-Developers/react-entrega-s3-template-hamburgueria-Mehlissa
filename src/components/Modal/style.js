@@ -28,6 +28,11 @@ export const StyledModal = styled.div`
 
   .modalController__container {
     padding: 25px 25px;
+    height: 65%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .modalController__container--Header {
@@ -49,5 +54,60 @@ export const StyledModal = styled.div`
     color: rgba(255, 255, 255, 0.5);
 
     border: none;
+  }
+
+  .ListProductsCart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ListProductsCart__container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .ListProductsCart__container--divimage {
+    background-color: var(--grey-100);
+
+    margin-right: 10px;
+  }
+
+  .ListProductsCart__container--image {
+    width: 50px;
+  }
+
+  .footer {
+    border-top: solid 2px var(--grey-100);
+  }
+
+  .divFooterContainer {
+    margin-top: 15px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .buttonFooter {
+    background-color: var(--grey-100);
+
+    margin-top: 20px;
+    width: 100%;
+    height: 53px;
+
+    border: none;
+    border-radius: 8px;
+  }
+
+  .ButtonTrash {
+    cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    .modalController {
+      min-width: 500px;
+    }
   }
 `;

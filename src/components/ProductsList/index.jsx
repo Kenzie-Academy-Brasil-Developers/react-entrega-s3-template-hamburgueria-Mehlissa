@@ -1,10 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { SubTitle, Title, Value } from "../../styles/typography";
 import { StyledList } from "./style";
 
-export const ProductsList = ({ inputSearch, setButtonAdd }) => {
-  const [products, setProducts] = useState([]);
-
+export const ProductsList = ({
+  inputSearch,
+  products,
+  addProducts,
+  setProducts,
+  teste,
+}) => {
   const filterProducts = products.filter((product) =>
     product.name.toUpperCase().includes(inputSearch.toUpperCase())
   );
@@ -32,11 +37,14 @@ export const ProductsList = ({ inputSearch, setButtonAdd }) => {
             />
           </div>
           <div className="listProducts__divMain">
-            <h3>{product.name}</h3>
-            <p>{product.category}</p>
-            <p>R$ {product.price},00</p>
+            <Title>{product.name}</Title>
+            <SubTitle>{product.category}</SubTitle>
+            <Value>R$ {product.price},00</Value>
             <button
-              onClick={() => setButtonAdd(product.id)}
+              onClick={() => {
+                addProducts(product);
+                teste(product.id);
+              }}
               className="listProducts__divMain--Button"
             >
               Adicionar

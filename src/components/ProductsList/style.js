@@ -14,7 +14,7 @@ export const StyledList = styled.ul`
   .listProducts {
     min-width: 300px;
 
-    border: solid 2px var(--grey-100);
+    border: solid 3px var(--grey-100);
     border-radius: 5px;
 
     display: flex;
@@ -60,6 +60,20 @@ export const StyledList = styled.ul`
   @media (min-width: 768px) {
     overflow: none;
 
+    gap: 45px;
+
     flex-wrap: wrap;
+
+    .listProducts:hover {
+      border: solid 3px var(--color-primary);
+    }
+
+    .listProducts__divMain--Button:hover {
+      background-color: var(--color-primary);
+    }
+
+    .listProducts__divMain--Button:active {
+      background-color: var(--color-primary);
+    }
   }
 `;

@@ -21,6 +21,10 @@ export const StyledHeader = styled.header`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+
+    max-width: 100%;
+    padding-right: 17px;
   }
 
   .headerContainer__DivCart {
@@ -55,6 +59,8 @@ export const StyledHeader = styled.header`
   }
 
   .headerContainer__search {
+    width: 100vw;
+
     display: flex;
     flex-direction: column;
   }
@@ -100,6 +106,43 @@ export const StyledHeader = styled.header`
   @media (min-width: 768px) {
     .headerContainer {
       padding: 18px 5%;
+
+      flex-direction: row;
+    }
+
+    .headerContainer__search {
+      width: 300px;
+
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .headerContainer__logo {
+      flex-wrap: nowrap;
+      width: 100%;
+    }
+
+    .headerContainer__DivCart {
+      width: 100%;
+      padding-right: 15px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+    }
+
+    .headerContainer__CountCart {
+      margin-right: -9px;
+      margin-top: -15px;
+    }
+
+    .headerContainer__search--div {
+      margin-top: 0px;
+      margin-left: 23px;
+
+      width: 70vw;
+      height: 45px;
     }
   }
 `;

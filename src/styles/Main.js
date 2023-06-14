@@ -5,6 +5,9 @@ export const StyledMain = styled.main`
   padding: 18px 15px;
 
   @media (min-width: 768px) {
-    padding: 18px 5%;
+    margin-top: 102px;
+    padding: 18px 0px;
+    padding-left: 10%;
+    padding-right: 3%;
   }
 `;
